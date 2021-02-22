@@ -64,7 +64,7 @@ About 52% -- 43/84.
 - What is the probability a randomly selected patient received the placebo
   and the treatment?
   
-0%
+0% -- this is disjoint.
   
 - What is the probability a randomly selected patient had some improvement or
   was on the treatment?
@@ -85,7 +85,7 @@ Suppose we draw a single marble from our imaginary box, where all the marbles
 are equally likely to be selected. What is the probability the marble is blue? 
 How about white?
 
-3/8 and 1/8
+3/8, or 37.5%, for a blue marble and 1/8, or 12.5% for a white marble.
 
 We can simulate this "drawing" with the `sample()` function.
 
@@ -113,6 +113,8 @@ prop.table(counts)
 
 How close is this value to the "true" probability?
 
+Pretty close.
+
 **To summarize our process:**
 
 1. We defined the sample space for our experiment - `marbles`
@@ -128,6 +130,8 @@ color if we make two draws with replacement? We haven't discussed how to
 compute this theoretically yet, but this is what computers are good at.
 
 Before we do this, what is your guess as to what the probability will be?
+
+Less than 50%/
 
 We'll still use `sample()` to run our simulation many times, but we'll
 use `dplyr` functions to compute the relative frequencies.
@@ -167,6 +171,8 @@ difference between dice roll 1 and dice roll 2 is equal to 4.
 Perform a simulation to compute this empirical probability.
 
 Write down your guess to the answer before you calculate it.
+
+The latter is probably higher.
 
 ```{r simulate_rolls}
 roll_results <- tibble(
