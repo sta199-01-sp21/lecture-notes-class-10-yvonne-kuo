@@ -1,7 +1,7 @@
 ---
 title: "Introduction to probability"
-author: ""
-date: ""
+author: "Yvonne Kuo"
+date: "2/22/2021"
 output: html_document
 editor_options: 
   chunk_output_type: console
@@ -50,17 +50,26 @@ xtabs(~ Treatment + Improved, data = Arthritis) %>%
 
 - How many patients were enrolled in the clinical trial?
 
+84 patients were enrolled in the clinical trial.
+
 - What is the probability a randomly selected patient received the placebo?
+
+About 52% -- 43/84.
 
 - What is the probability a randomly selected patient received the placebo
   and had a marked improvement?
   
+7/84, so 8.3%.
+  
 - What is the probability a randomly selected patient received the placebo
   and the treatment?
   
+0%
+  
 - What is the probability a randomly selected patient had some improvement or
   was on the treatment?
-
+  
+48/84, so 57.1%.
 ## Using computer simulations to calculate probabilities
 
 #### Example
@@ -75,6 +84,8 @@ marbles <- c("red", "red", "white", "red", "blue", "blue", "red", "blue")
 Suppose we draw a single marble from our imaginary box, where all the marbles
 are equally likely to be selected. What is the probability the marble is blue? 
 How about white?
+
+3/8 and 1/8
 
 We can simulate this "drawing" with the `sample()` function.
 
@@ -158,14 +169,24 @@ Perform a simulation to compute this empirical probability.
 Write down your guess to the answer before you calculate it.
 
 ```{r simulate_rolls}
-
+roll_results <- tibble(
+  die_1 = replicate(n= 10000, expr = sample(1:6, size = 1)),
+  die_2 = replicate(n= 10000, expr = sample(1:6, size = 1))
+)
+roll_results
 ```
 
 ```{r identify_events}
-
+roll_results <- roll_results %>%
+  mutate(event_1 = die_1^2 == die_2,
+         event_2 = abs(die_1-die_2) == 4)
+roll_results
 ```
 
 ```{r summarize_rolls}
+roll_results %>%
+  summarize(event_1_prob = mean(event_1),
+            event_2_prob = mean(event_2))
 
 ```
 
